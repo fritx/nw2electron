@@ -1,15 +1,11 @@
-<h1>Username</h1>
-<h1>Password</h1>
+<h4>Username</h4>
+<h4>Password</h4>
 <button onclick="login()">Login</button>
 
 <script src="common.js"></script>
 <script>
-/* global setUser, openWin */
-/* window getWin */
-setUser(null)
-
+/* global setUser */
 function login () {
-  openWin('home')
-  getWin().close()
+  setUser('user')
 }
 </script>

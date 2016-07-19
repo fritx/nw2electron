@@ -1,29 +1,8 @@
 <script src="desktop.js"></script>
 <script src="common.js"></script>
 <script>
-/* global getUser, setUser, getWins, openWin, createTray */
+/* global openWin */
 /* window getWin */
-openWin('login')
-setUser(null)
-
 getWin().showDevTools() // debug
-
-const tray = createTray({
-  icon: 'icon.png'
-})
-
-tray.on('click', function () {
-  const wins = getWins()
-  if (wins.home) {
-    wins.home.focus()
-  }
-  else if (wins.login) {
-    wins.login.focus()
-  }
-  else if (getUser()) {
-    openWin('home')
-  } else {
-    openWin('login')
-  }
-})
+openWin('login')
 </script>
