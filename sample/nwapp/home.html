@@ -1,0 +1,11 @@
+<h1>Home</h1>
+<button onclick="logout()">Logout</button>
+
+<script src="desktop.js"></script>
+<script>
+/* global win, openWindow */
+function logout () {
+  openWindow('login.html', { focus: true })
+  win.close()
+}
+</script>

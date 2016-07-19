@@ -1,0 +1,10 @@
+{
+  "name": "nwapp",
+  "main": "main.html",
+  "window": {
+    "show": false
+  },
+  "scripts": {
+    "start": "nw ."
+  }
+}

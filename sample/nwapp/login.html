@@ -1,0 +1,12 @@
+<h1>Username</h1>
+<h1>Password</h1>
+<button onclick="login()">Login</button>
+
+<script src="desktop.js"></script>
+<script>
+/* global win, openWindow */
+function login () {
+  openWindow('home.html', { focus: true })
+  win.close()
+}
+</script>
