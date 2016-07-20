@@ -11,8 +11,12 @@ body {
   -webkit-user-select: auto;
   -webkit-app-region: no-drag;
 }
+.drag {
+  -webkit-user-select: none;
+  cursor: default;
+}
 .nodrag, button {
-  -webkit-app-region: no-drag;
+  -webkit-app-region: no-drag !important;
 }
 .frame {
   height: 100%;
@@ -20,16 +24,15 @@ body {
   border-radius: 6px;
   background-color: rgba(160, 120, 120, .97);
   box-shadow: 0 0 10px 0 rgba(101, 111, 122, 0.81);
-  -webkit-app-region: drag;
 }
 .wrap {
   height: 100%;
   overflow-y: auto;
 }
-.wrap::-webkit-scrollbar {
+/*.wrap::-webkit-scrollbar {
   display: none;
 }
-/*.wrap::-webkit-scrollbar {
+.wrap::-webkit-scrollbar {
   width: 9px;
   height: 9px;
 }
@@ -43,9 +46,12 @@ body {
   background-color: transparent;
   -webkit-app-region: no-drag;
 }*/
+
+.mac .frame { -webkit-app-region: drag; }
+.mac.maximized .frame { -webkit-app-region: no-drag; }
 </style>
 
-<div class="frame">
+<div class="frame drag">
   <div class="wrap">
     <h1>Hello</h1>
     <p class="selectable">Selectable sentence.</p>
@@ -64,3 +70,102 @@ body {
     <button>Button</button>
   </div>
 </div>
+
+<script src="jquery-3.1.0.min.js"></script>
+<script>
+// 如果是mac 添加相应css样式
+const $html = $('html')
+if (Constant.TRANSPARENT) {
+  $html.addClass('transparent')
+}
+if (Constant.IS_MAC) {
+  $html.addClass('mac')
+}
+if (Constant.IS_WIN) {
+  $html.addClass('win')
+}
+
+// js自实现窗体拖动
+// 避免app-region:drag带来的菜单/双击最大化等
+// https://github.com/h5lium/xstu/commit/305caab064efdbf293fa49796c4d3bad3c8b0117
+// mac有边框 不需要此效果 而且稍微有点卡
+if (Constant.IS_WIN) {
+  var $win = $(window)
+  var dragging = false
+  var dx, dy
+  var drag = [
+    '.drag'
+    // '.drag', '.drag-box', '#h_chat_top', '.mess-title', '.homeList', '.dragable', '#head_wrap', '#h_main_contact', '#h_mian'
+  ].join(', ')
+
+  var nodrag = [
+    '.nodrag,.selectable,label,input,button,textarea,select,.list,.txt,.btn'
+    /*,'.No_drag',
+    '.alertify .title strong',
+    //'.pull_right',
+    '.search_cont',
+    '.user-list',
+    '.menu-list',
+    '.node_list',
+    '.session_list',
+    '.nav_users_work',
+    '.ico-Set',
+    '.user-mess',
+    '.headPhoMess',
+    '.collectFile',
+    '.dis-span',
+    //'.remove-drag #h_chat_top',
+    '.user-set',
+    '.login-title span',
+    'a[href],label,input,button',
+    '.user-name',
+    '.user-explain'*/
+  ].join(', ')
+
+  var maximize = [
+    '.contact_max',
+    '.max'
+  ].join(', ')
+
+  $(document).delegate(drag, 'mousedown', function(e){
+    e = e.originalEvent || e
+    var canDrag = $(e.target).closest(nodrag).length < 1
+      && !win._isMaximized
+    if (!canDrag) return
+    // hack 对应的css类实在太多 就加在这了
+    // $(e.target).css('cursor', 'default')
+    dragging = true
+    const [x, y] = win.getPosition()
+    dx = e.screenX - x
+    dy = e.screenY - y
+  })
+  $(document).delegate(drag, 'dblclick', function(e){
+    // todo: get _isResizable
+
+    var canDrag = $(e.target).closest(nodrag).length < 1
+    var canResize = $(maximize).length > 0
+    if (!canDrag) return
+    if (!canResize) return
+    if (win._isMaximized) win.unmaximize()
+    else win.maximize()
+    // if (win._isMaximized) {
+    //   win.unmaximize()
+    //   $html.removeClass('maximized')
+    //   win._isMaximized = false
+    // }
+    // else {
+    //   win.maximize()
+    //   $html.addClass('maximized')
+    //   win._isMaximized = false
+    // }
+  })
+  $win.on('mousemove', function(e){
+    if (!dragging) return
+    e = e.originalEvent || e
+    win.setPosition(e.screenX - dx, e.screenY - dy)
+  })
+  $win.on('mouseup', function(){
+    dragging = false
+  })
+}
+</script>
