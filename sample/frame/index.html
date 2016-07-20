@@ -1,0 +1,24 @@
+<style>
+body {
+  -webkit-user-select: none;
+}
+.selectable {
+  -webkit-user-select: auto;
+  -webkit-app-region: no-drag;
+}
+.nodrag, button {
+  -webkit-app-region: no-drag;
+}
+.frame {
+  height: 100%;
+  border-radius: 6px;
+  background-color: rgba(220, 220, 220, .8);
+  -webkit-app-region: drag;
+}
+</style>
+
+<div class="frame">
+  <h1>Hello</h1>
+  <p class="selectable">Selectable sentence.</p>
+  <button>Button</button>
+</div>
