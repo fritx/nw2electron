@@ -1,5 +1,10 @@
 <style>
+html, body {
+  overflow: hidden;
+}
 body {
+  margin: 0;
+  padding: 6px;
   -webkit-user-select: none;
 }
 .selectable {
@@ -11,14 +16,51 @@ body {
 }
 .frame {
   height: 100%;
+  overflow: hidden;
   border-radius: 6px;
-  background-color: rgba(220, 220, 220, .8);
+  background-color: rgba(160, 120, 120, .97);
+  box-shadow: 0 0 10px 0 rgba(101, 111, 122, 0.81);
   -webkit-app-region: drag;
 }
+.wrap {
+  height: 100%;
+  overflow-y: auto;
+}
+.wrap::-webkit-scrollbar {
+  display: none;
+}
+/*.wrap::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+.wrap::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(178, 176, 176, 0.3);
+  margin-right:3px;
+  -webkit-app-region: no-drag;
+}
+.wrap::-webkit-scrollbar-track {
+  background-color: transparent;
+  -webkit-app-region: no-drag;
+}*/
 </style>
 
 <div class="frame">
-  <h1>Hello</h1>
-  <p class="selectable">Selectable sentence.</p>
-  <button>Button</button>
+  <div class="wrap">
+    <h1>Hello</h1>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <p class="selectable">Selectable sentence.</p>
+    <button>Button</button>
+  </div>
 </div>

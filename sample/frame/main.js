@@ -3,10 +3,10 @@ const { app, BrowserWindow } = require('electron')
 
 app.on('ready', () => {
   const win = new BrowserWindow({
-    width: 600,
-    minWidth: 600,
-    height: 400,
-    minHeight: 400,
+    width: 400,
+    minWidth: 400,
+    height: 300,
+    minHeight: 300,
     frame: false,
     transparent: true,
     webPreferences: {
