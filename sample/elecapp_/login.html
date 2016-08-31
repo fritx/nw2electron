@@ -1,0 +1,11 @@
+<h4>Username</h4>
+<h4>Password</h4>
+<button onclick="login()">Login</button>
+
+<script src="renderer.js"></script>
+<script>
+/* global ipc */
+function login () {
+  ipc.emit('user-login', 'user')
+}
+</script>

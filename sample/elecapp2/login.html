@@ -1,0 +1,33 @@
+
+<h4>Username</h4>
+<button onclick="test()">New</button>
+
+<script>
+/* global remote, join, __dirname */
+// const { BrowserWindow } = remote
+
+function test () {
+  console.log('test')
+  const win = new remote.BrowserWindow({
+    width: 300,
+    height: 200,
+    show: false,
+    webPreferences: {
+      preload: 'e:\\dev\\nw2electron\\sample\\elecapp2\\preload.js',
+      nodeIntegration: false
+    }
+  })
+  // win.loadURL('file://' + join(__dirname, 'login.html'))
+  console.log('1')
+  // win.on('ready-to-show', () => {
+  //   console.log('3')
+  //   win.show()
+  // })
+  win.webContents.on('did-finish-load', function() {
+      console.log('3')
+      win.show();
+    });
+  win.loadURL('e:\\dev\\nw2electron\\sample\\elecapp2\\login.html')
+  console.log('2')
+}
+</script>

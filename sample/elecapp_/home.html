@@ -1,0 +1,11 @@
+<h1>Home</h1>
+<h1>Chat</h1>
+<button onclick="logout()">Logout</button>
+
+<script src="renderer.js"></script>
+<script>
+/* global ipc */
+function logout () {
+  ipc.emit('user-logout')
+}
+</script>
