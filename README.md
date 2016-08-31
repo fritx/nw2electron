@@ -1,8 +1,9 @@
 nw.gui
 
-- [ ] App
+- [x] App
   - quit()
-  - on()
+  - registerGlobalHotKey(shortcut)
+  - unregisterGlobalHotKey(shortcut)
 - [x] Clipboard
   - get()
   - proto
@@ -10,20 +11,21 @@ nw.gui
     - get([type])
     - clear()
 - [ ] Menu
-- [ ] MenuItem
-- [ ] Screen
+- [x] MenuItem
+- [x] Screen
   - Init()
   - screens
 - [x] Shell
   - openExternal(URI)
   - openItem(file_path)
   - showItemInFolder(file_path)
-- [ ] Shortcut
+- [x] Shortcut
 - [ ] Tray
-- [ ] Window
+- [x] Window
   - get()
   - open()
-  - proto
+
+- Mac Menu http://electron.atom.io/docs/api/menu/
 
 - Detect support for transparent in Electron https://github.com/electron/electron/issues/381#issuecomment-233291779
 
